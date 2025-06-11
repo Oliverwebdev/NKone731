@@ -1,0 +1,66 @@
+.crew {
+  background: #000;
+  background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,0,0,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+}
+
+.crew-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.member-card {
+  text-align: center;
+  position: relative;
+  padding: 30px;
+  background: rgba(17, 17, 17, 0.8);
+  border: 2px solid #333;
+  transition: all 0.3s ease;
+}
+
+.member-card:hover {
+  border-color: #ff0000;
+  transform: scale(1.05);
+}
+
+.member-image {
+  width: 150px;
+  height: 150px;
+  background: #333;
+  margin: 0 auto 20px;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  filter: grayscale(100%) contrast(120%);
+  transition: filter 0.3s ease;
+}
+
+.member-card:hover .member-image {
+  filter: grayscale(50%) contrast(130%);
+}
+
+.member-name {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #ff0000;
+  font-family: 'Black Ops One', cursive;
+}
+
+.social-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #EAEAEA;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  color: #ff0000;
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  .crew-grid {
+    grid-template-columns: 1fr;
+  }
+}
