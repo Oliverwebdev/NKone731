@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './Music.css';
 
 const Music = () => {
-  const [activeVideoId, setActiveVideoId] = useState(null);
   const [hoveredTrack, setHoveredTrack] = useState(null);
   const [loadedThumbnails, setLoadedThumbnails] = useState({});
+
+  const getVideoId = (url) => {
+    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+    return match ? match[1] : null;
+  };
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -17,30 +21,28 @@ const Music = () => {
   }, []);
 
   const tracks = [
-    { id: 1, title: 'PillaOne, Mr.Nick & Zkittlez - Kein Mitleid DKM', videoId: 'CgYf3n8Yy8g' },
-    { id: 2, title: 'ZKTTLZ - DESIRE (BVA TRIBUT)', videoId: '89G_j5i4bPo' },
-    { id: 3, title: 'PillaOne & Bad Santa - Jingle Bells', videoId: 'd9uFhY3pY5w' },
-    { id: 4, title: 'NKone7.3.1. - Stimmen im Kopf', videoId: 'eX8oH1kSE3A' },
-    { id: 5, title: 'NKone7.3.1 - Payday - Filla23 aka F.A.K.T X Zkittlez X PillaOne', videoId: 'o803j3U2i8g' },
-    { id: 6, title: 'Pillaone X Zkittlez X Lil Bandit - Eisige Zeiten', videoId: '5-3t_W7cwwU' },
-    { id: 7, title: 'Zkittlez - Strain Hunter', videoId: '3tLgEw51FEI' },
-    { id: 8, title: 'Zkittlez Vs. Passwort Battleround/ Battlerapbunker', videoId: '5370jTzF_pY' },
-    { id: 9, title: 'Zkittlez VS Niconasenspray / Battlerapbunker HR', videoId: 'f0mJbjpFw1s' },
-    { id: 10, title: 'NKone7.3.1. TodesTag (DKM-Moncheri DissTrack)', videoId: 'K285d8RCF1E' },
-    { id: 11, title: 'Zkittlez & PillaOne - Kontrollzwang und Gefühle', videoId: 'zNylR6KeU9M' },
-    { id: 12, title: 'PillaOne & Zkittlez - Schnauze voll', videoId: 't9eiea6fL5A' },
+    { id: 1, title: 'PillaOne, Mr.Nick & Zkittlez - Kein Mitleid DKM', url: 'https://www.youtube.com/watch?v=_oYKXY61sCM&ab_channel=Nkone7.3.1.' },
+    { id: 2, title: 'ZKTTLZ - DESIRE (BVA TRIBUT)', url: 'https://www.youtube.com/watch?v=YNuT1klylBU&ab_channel=Nkone7.3.1.' },
+    { id: 3, title: 'PillaOne & Bad Santa - Jingle Bells', url: 'https://www.youtube.com/watch?v=29FXFS8EMYY&ab_channel=Nkone7.3.1.' },
+    { id: 4, title: 'NKone7.3.1. - Stimmen im Kopf', url: 'https://www.youtube.com/watch?v=kQ0eWcoxILA&ab_channel=Nkone7.3.1.' },
+    { id: 5, title: 'NKone7.3.1 - Payday - Filla23 aka F.A.K.T X Zkittlez X PillaOne', url: 'https://www.youtube.com/watch?v=EVB1s60kDa8&ab_channel=Nkone7.3.1.' },
+    { id: 6, title: 'Pillaone X Zkittlez X Lil Bandit - Eisige Zeiten', url: 'https://www.youtube.com/watch?v=rUOgA3QIF5c&ab_channel=Nkone7.3.1.' },
+    { id: 7, title: 'Zkittlez - Strain Hunter', url: 'https://www.youtube.com/watch?v=krfRtIsMRXQ&ab_channel=Nkone7.3.1.' },
+    { id: 8, title: 'Zkittlez Vs. Passwort Battleround/ Battlerapbunker', url: 'https://www.youtube.com/watch?v=yLGtMjBDaJg' },
+    { id: 9, title: 'Zkittlez VS Niconasenspray / Battlerapbunker HR', url: 'https://www.youtube.com/watch?v=exl7rwqJQVI&ab_channel=Nkone7.3.1.' },
+    { id: 10, title: 'NKone7.3.1. TodesTag (DKM-Moncheri DissTrack)', url: 'https://www.youtube.com/watch?v=rDJ10zalYh0&ab_channel=Nkone7.3.1.' },
+    { id: 11, title: 'Zkittlez & PillaOne - Kontrollzwang und Gefühle', url: 'https://www.youtube.com/watch?v=XlYR4UjjaVo&ab_channel=Nkone7.3.1.' },
+    { id: 12, title: 'PillaOne & Zkittlez - Schnauze voll', url: 'https://www.youtube.com/watch?v=5sy1hBHeQfE&ab_channel=Nkone7.3.1.' },
   ];
 
-  const handleVideoClick = (videoId) => {
-    setActiveVideoId(videoId);
+  const handleVideoClick = (url) => {
+    // Direkt zu YouTube weiterleiten statt embedding
+    window.open(url, '_blank');
   };
 
-  const handleCloseVideo = () => {
-    setActiveVideoId(null);
-  };
 
-  const handleThumbnailLoad = (videoId) => {
-    setLoadedThumbnails(prev => ({ ...prev, [videoId]: true }));
+  const handleThumbnailLoad = (url) => {
+    setLoadedThumbnails(prev => ({ ...prev, [url]: true }));
   };
 
   return (
@@ -80,31 +82,25 @@ const Music = () => {
                 <h3 className="track-title">{track.title}</h3>
 
                 <div className="video-container">
-                  {activeVideoId === track.videoId ? (
-                    <iframe
-                      src={`https://www.youtube.com/embed/${track.videoId}?autoplay=1&rel=0&modestbranding=1`}
-                      title={track.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className="video-iframe"
-                    />
-                  ) : (
-                    <div 
-                      className="thumbnail-wrapper"
-                      onClick={() => handleVideoClick(track.videoId)}
-                    >
+                  <div 
+                    className="thumbnail-wrapper"
+                    onClick={() => handleVideoClick(track.url)}
+                  >
                       {/* Loading skeleton */}
-                      {!loadedThumbnails[track.videoId] && (
+                      {!loadedThumbnails[track.url] && (
                         <div className="thumbnail-skeleton"></div>
                       )}
                       
                       <img
-                        src={`https://img.youtube.com/vi/${track.videoId}/maxresdefault.jpg`}
+                        src={`https://img.youtube.com/vi/${getVideoId(track.url)}/hqdefault.jpg`}
                         alt={track.title}
                         className="video-thumbnail"
-                        onLoad={() => handleThumbnailLoad(track.videoId)}
+                        onLoad={() => handleThumbnailLoad(track.url)}
                         onError={(e) => {
-                          e.target.src = `https://img.youtube.com/vi/${track.videoId}/hqdefault.jpg`;
+                          // Fallback zu default thumbnail wenn hqdefault nicht verfügbar
+                          if (e.target.src.includes('hqdefault')) {
+                            e.target.src = `https://img.youtube.com/vi/${getVideoId(track.url)}/default.jpg`;
+                          }
                         }}
                       />
                       
@@ -120,13 +116,12 @@ const Music = () => {
                       {/* Duration badge */}
                       <div className="duration-badge">Click to play</div>
                     </div>
-                  )}
                 </div>
 
                 {/* Action buttons */}
                 <div className={`track-actions ${isMobile ? 'visible' : ''}`}>
                   <button
-                    onClick={() => window.open(`https://www.youtube.com/watch?v=${track.videoId}`, '_blank')}
+                    onClick={() => window.open(track.url, '_blank')}
                     className="action-button youtube-button"
                   >
                     <svg className="button-icon" fill="currentColor" viewBox="0 0 20 20">
@@ -136,51 +131,12 @@ const Music = () => {
                     <span className="button-text-full">YouTube</span>
                     <span className="button-text-short">YT</span>
                   </button>
-                  {activeVideoId === track.videoId && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleCloseVideo();
-                      }}
-                      className="action-button close-button"
-                    >
-                      Close
-                    </button>
-                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Active video modal */}
-        {activeVideoId && (
-          <div 
-            className="video-modal"
-            onClick={handleCloseVideo}
-          >
-            <div 
-              className="modal-content"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <iframe
-                src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1&rel=0&modestbranding=1`}
-                title="Video Player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="modal-iframe"
-              />
-              <button
-                onClick={handleCloseVideo}
-                className="modal-close"
-              >
-                <svg className="close-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
