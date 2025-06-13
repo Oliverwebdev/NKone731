@@ -8,6 +8,8 @@ const Music = () => {
   const [loadedThumbnails, setLoadedThumbnails] = useState({});
   const [currentPlaying, setCurrentPlaying] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [visibleTracks, setVisibleTracks] = useState(6); // Show 6 tracks initially
+  const [loading, setLoading] = useState(false);
 
   const getVideoId = (url) => {
     const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
@@ -18,6 +20,7 @@ const Music = () => {
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
+      setVisibleTracks(window.innerWidth < 768 ? 4 : 6); // Show fewer on mobile
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -119,6 +122,23 @@ const Music = () => {
     }
   };
 
+  const loadMoreTracks = () => {
+    setLoading(true);
+    // Simulate loading delay for better UX
+    setTimeout(() => {
+      setVisibleTracks(prev => Math.min(prev + (isMobile ? 4 : 6), tracks.length));
+      setLoading(false);
+    }, 500);
+  };
+
+  const showAll = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setVisibleTracks(tracks.length);
+      setLoading(false);
+    }, 300);
+  };
+
   const getThumbnailUrl = (videoUrl) => {
     const videoId = getVideoId(videoUrl);
     if (!videoId) return null;
@@ -148,7 +168,7 @@ const Music = () => {
   };
 
   return (
-    <section className="music-section" ref={ref}>
+    <section className="music-section" id="music" ref={ref}>
       {/* Animated background */}
       <div className="music-background">
         <motion.div 
@@ -185,7 +205,7 @@ const Music = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <AnimatePresence>
-            {tracks.map((track, index) => (
+            {tracks.slice(0, visibleTracks).map((track, index) => (
               <motion.div
                 key={track.id}
                 className={`track-card ${hoveredTrack === track.id ? 'hovered' : ''} ${isMobile ? 'mobile' : ''}`}
@@ -336,6 +356,62 @@ const Music = () => {
           </AnimatePresence>
         </motion.div>
 
+        {/* Load More Controls */}
+        {visibleTracks < tracks.length && (
+          <motion.div 
+            className="load-more-section"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="load-more-buttons">
+              <motion.button
+                onClick={loadMoreTracks}
+                className="load-more-btn primary"
+                disabled={loading}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {loading ? (
+                  <div className="loading-spinner">
+                    <div className="spinner"></div>
+                    <span>Loading...</span>
+                  </div>
+                ) : (
+                  <>
+                    <span className="btn-icon">🎵</span>
+                    <span>Load {Math.min(isMobile ? 4 : 6, tracks.length - visibleTracks)} More</span>
+                  </>
+                )}
+              </motion.button>
+              
+              <motion.button
+                onClick={showAll}
+                className="load-more-btn secondary"
+                disabled={loading}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span className="btn-icon">📂</span>
+                <span>Show All ({tracks.length - visibleTracks} remaining)</span>
+              </motion.button>
+            </div>
+            
+            <div className="progress-indicator">
+              <div className="progress-bar">
+                <motion.div 
+                  className="progress-fill"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(visibleTracks / tracks.length) * 100}%` }}
+                  transition={{ duration: 0.5 }}
+                />
+              </div>
+              <span className="progress-text">
+                {visibleTracks} of {tracks.length} tracks
+              </span>
+            </div>
+          </motion.div>
+        )}
         
         {/* Stats section */}
         <motion.div 
@@ -345,16 +421,16 @@ const Music = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <div className="stat-item">
-            <span className="stat-number">{tracks.length}</span>
-            <span className="stat-label">Tracks</span>
+            <span className="stat-number">14</span>
+            <span className="stat-label">Videos</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number">1M+</span>
-            <span className="stat-label">Plays</span>
+            <span className="stat-number">100+</span>
+            <span className="stat-label">Subscribers</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number">50K+</span>
-            <span className="stat-label">Fans</span>
+            <span className="stat-number">10K+</span>
+            <span className="stat-label">Views</span>
           </div>
         </motion.div>
       </div>

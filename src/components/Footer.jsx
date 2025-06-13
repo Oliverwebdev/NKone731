@@ -177,7 +177,7 @@ const Footer = () => {
                 }}
               >
                 <span className="dev-icon">⚡</span>
-                <span className="dev-name">Premium Web Developer</span>
+                <span className="dev-name">WebDevOli</span>
               </motion.a>
             </div>
           </motion.div>
