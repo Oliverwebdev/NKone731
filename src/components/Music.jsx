@@ -421,7 +421,7 @@ const Music = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <div className="stat-item">
-            <span className="stat-number">14</span>
+            <span className="stat-number">12</span>
             <span className="stat-label">Videos</span>
           </div>
           <div className="stat-item">
