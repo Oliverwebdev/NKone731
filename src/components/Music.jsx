@@ -216,11 +216,6 @@ const Music = () => {
                   transition={{ duration: 2, repeat: Infinity }}
                 ></motion.div>
                 
-                {/* Track number */}
-                <div className="track-number">
-                  <span className="number-main">{String(track.id).padStart(2, '0')}</span>
-                  <span className="number-accent">.</span>
-                </div>
 
                 <div className="track-content">
                   <motion.h3 

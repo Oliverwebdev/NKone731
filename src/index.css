@@ -101,10 +101,10 @@ body {
   font-variant-ligatures: common-ligatures;
 }
 
-/* Global Scroll Snap */
-html {
+/* Global Scroll Snap - Disabled to allow free scrolling */
+/* html {
   scroll-snap-type: y mandatory;
-}
+} */
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -310,7 +310,7 @@ a:focus {
 .section {
   min-height: 100vh;
   padding: var(--space-5xl) 0;
-  scroll-snap-align: start;
+  /* scroll-snap-align: start; */
 }
 
 .section-title {
