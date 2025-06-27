@@ -35,7 +35,7 @@ const Navbar = () => {
         >
           <a href="#home" className="nav-logo-link">
             <motion.img 
-              src="/Logo-nav.jpeg" 
+              src={`${import.meta.env.BASE_URL}Logo-nav.jpeg`}
               alt="NKone Logo" 
               className="nav-logo-image"
               initial={{ opacity: 0, scale: 0.8 }}

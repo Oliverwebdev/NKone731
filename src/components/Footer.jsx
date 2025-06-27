@@ -27,6 +27,12 @@ const Footer = () => {
       url: 'https://youtube.com/@nkone731',
       icon: <YouTubeIcon />,
       color: '#FF0000'
+    },
+    {
+      name: 'Facebook',
+      url: 'https://facebook.com/nkone731',
+      icon: <FacebookIcon />,
+      color: '#1877F2'
     }
   ]
 
@@ -60,7 +66,7 @@ const Footer = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <motion.img 
-                src="/logo-footer.webp" 
+                src={`${import.meta.env.BASE_URL}logo-footer.webp`}
                 alt="NKone Logo" 
                 className="footer-logo-image"
                 whileHover={{ 
@@ -90,7 +96,7 @@ const Footer = () => {
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   whileHover={{ 
-                    scale: 1.1, 
+                    scale: 1.15, 
                     y: -3,
                     boxShadow: `0 8px 25px ${link.color}40`
                   }}
@@ -98,7 +104,6 @@ const Footer = () => {
                   style={{ '--social-color': link.color }}
                 >
                   {link.icon}
-                  <span className="social-label">{link.name}</span>
                 </motion.a>
               ))}
             </div>
@@ -197,45 +202,66 @@ const Footer = () => {
 }
 
 const InstagramIcon = () => (
-  <div style={{
-    width: '24px',
-    height: '24px',
-    fontSize: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'currentColor'
-  }}>
-    📷
-  </div>
+  <svg 
+    width="28" 
+    height="28" 
+    viewBox="0 0 24 24" 
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M16.5 7.5 16.51 7.49"/>
+  </svg>
 )
 
 const TikTokIcon = () => (
-  <div style={{
-    width: '24px',
-    height: '24px',
-    fontSize: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'currentColor'
-  }}>
-    🎵
-  </div>
+  <svg 
+    width="28" 
+    height="28" 
+    viewBox="0 0 24 24" 
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+  </svg>
 )
 
 const YouTubeIcon = () => (
-  <div style={{
-    width: '24px',
-    height: '24px',
-    fontSize: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'currentColor'
-  }}>
-    ▶️
-  </div>
+  <svg 
+    width="28" 
+    height="28" 
+    viewBox="0 0 24 24" 
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+    <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor"/>
+  </svg>
+)
+
+const FacebookIcon = () => (
+  <svg 
+    width="28" 
+    height="28" 
+    viewBox="0 0 24 24" 
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
 )
 
 export default Footer

@@ -50,7 +50,7 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           <motion.img 
-            src="/Logo1.jpeg" 
+            src={`${import.meta.env.BASE_URL}Logo1.jpeg`}
             alt="NKone Logo" 
             className="hero-logo-image"
             animate={{ 
