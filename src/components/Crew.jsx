@@ -15,7 +15,7 @@ const Crew = () => {
     { 
       id: 1,
       name: 'Filla23',
-      stage: 'F.A.K.T',
+      stage: 'Filla23',
       role: 'MC & Producer',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
       instagram: 'filla23',
@@ -23,7 +23,8 @@ const Crew = () => {
       youtube: 'nkone731',
       specialty: 'Lyricism & Production',
       years: '2019',
-      gradient: 'from-red-500 via-purple-500 to-blue-500'
+      gradient: 'from-red-500 via-purple-500 to-blue-500',
+      photo: 'Filla23.jpeg'
     },
     { 
       id: 2,
@@ -36,7 +37,8 @@ const Crew = () => {
       youtube: 'nkone731',
       specialty: 'Flow & Storytelling',
       years: '2020',
-      gradient: 'from-orange-500 via-red-500 to-pink-500'
+      gradient: 'from-orange-500 via-red-500 to-pink-500',
+      photo: 'PillaOne7.3.1.png'
     },
     { 
       id: 3,
@@ -49,7 +51,8 @@ const Crew = () => {
       youtube: 'nkone731',
       specialty: 'Battle Rap & Performance',
       years: '2021',
-      gradient: 'from-green-500 via-teal-500 to-cyan-500'
+      gradient: 'from-green-500 via-teal-500 to-cyan-500',
+      photo: 'Zkittlez7.3.1.png'
     }
   ]
 
@@ -121,12 +124,22 @@ const Crew = () => {
               />
               
 
-              {/* Member Image Placeholder */}
+              {/* Member Image */}
               <div className="member-image">
-                <div className={`image-placeholder gradient-${member.id}`}>
-                  <div className="image-overlay">
-                    <span className="member-initial">{member.name.charAt(0)}</span>
-                  </div>
+                <motion.img 
+                  src={`${import.meta.env.BASE_URL}${member.photo}`}
+                  alt={`${member.stage} - ${member.role}`}
+                  className="member-photo"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    filter: "brightness(1.1)"
+                  }}
+                />
+                <div className="member-image-overlay">
+                  <div className="member-image-gradient" />
                 </div>
               </div>
 
