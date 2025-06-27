@@ -5,22 +5,58 @@ import './Hero.css'
 import { useParallax } from '../hooks/useParallax'
 
 const Hero = () => {
-  const [typedText, setTypedText] = useState('')
-  const fullText = 'PREMIUM RAP COLLECTIVE'
   const scrollY = useParallax()
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
+  
+  // Typing animation texts
+  const typingTexts = [
+    'PREMIUM RAP COLLECTIVE',
+    'NUR KRANKE MUSIC',
+    'AUTHENTIC HIP-HOP',
+    'RAW TALENT UNLEASHED'
+  ]
+  
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
+  const [displayText, setDisplayText] = useState('')
+  const [isTyping, setIsTyping] = useState(true)
+  const [charIndex, setCharIndex] = useState(0)
 
   useEffect(() => {
-    let i = 0
-    const typeWriter = () => {
-      if (i < fullText.length) {
-        setTypedText(prev => prev + fullText.charAt(i))
-        i++
-        setTimeout(typeWriter, 80)
+    if (!inView) return
+
+    const currentText = typingTexts[currentTextIndex]
+    
+    if (isTyping) {
+      if (charIndex < currentText.length) {
+        const timeout = setTimeout(() => {
+          setDisplayText(currentText.slice(0, charIndex + 1))
+          setCharIndex(charIndex + 1)
+        }, 120)
+        return () => clearTimeout(timeout)
+      } else {
+        // Finished typing, wait then start deleting
+        const timeout = setTimeout(() => {
+          setIsTyping(false)
+        }, 3000)
+        return () => clearTimeout(timeout)
+      }
+    } else {
+      if (charIndex > 0) {
+        const timeout = setTimeout(() => {
+          setDisplayText(currentText.slice(0, charIndex - 1))
+          setCharIndex(charIndex - 1)
+        }, 60)
+        return () => clearTimeout(timeout)
+      } else {
+        // Finished deleting, move to next text
+        const timeout = setTimeout(() => {
+          setCurrentTextIndex((prev) => (prev + 1) % typingTexts.length)
+          setIsTyping(true)
+        }, 800)
+        return () => clearTimeout(timeout)
       }
     }
-    setTimeout(typeWriter, 1000)
-  }, [])
+  }, [charIndex, isTyping, currentTextIndex, inView, typingTexts])
 
   return (
     <section className="hero" id="home" ref={ref}>
@@ -95,8 +131,8 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <p className="hero-subtitle">
-            {typedText}
+          <div className="hero-subtitle">
+            <span className="typing-text">{displayText}</span>
             <motion.span 
               className="cursor"
               animate={{ opacity: [1, 0] }}
@@ -104,7 +140,7 @@ const Hero = () => {
             >
               |
             </motion.span>
-          </p>
+          </div>
         </motion.div>
 
         {/* Premium CTA Button */}
