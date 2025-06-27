@@ -33,7 +33,7 @@ const Navbar = () => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <a href="#home" className="nav-logo-link">
+          <a href="#" className="nav-logo-link">
             <motion.img 
               src={`${import.meta.env.BASE_URL}Logo-nav.jpeg`}
               alt="NKone Logo" 
