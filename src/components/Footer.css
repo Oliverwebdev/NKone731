@@ -56,6 +56,24 @@
   text-align: left;
 }
 
+.footer-logo-container {
+  margin-bottom: 12px;
+}
+
+.footer-logo-image {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footer-logo-image:hover {
+  box-shadow: 0 8px 30px rgba(255, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
 .footer-logo {
   font-size: 2.5rem;
   font-weight: 900;
@@ -398,6 +416,10 @@
     padding: 50px 12px 24px 12px;
   }
   
+  .footer-logo-image {
+    height: 50px;
+  }
+  
   .footer-logo {
     font-size: 2rem;
   }
@@ -516,5 +538,13 @@
   
   .developer-link {
     color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .footer-logo-image {
+    filter: brightness(0.9) contrast(1.1);
+  }
+  
+  .footer-logo-image:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   }
 }

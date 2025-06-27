@@ -1,3 +1,4 @@
-1. Vielleicht das Logo vom youtube Kanal das passt gut in die seite vom style
-2. vielleicht den passenden inhalt bei dem crew teil von jedem
-3. welche links sind wem wichtig auf der seite zu sein?
+navbar Logo bild statt schrift von nkone nehmen(logo-nav)
+footer logo bild statt schrift von nkone nehmen (logo-footer)
+bei landing page inhalt öndern lgo nehmen statt premium rap collektiv logo1 nehmen(logo1)
+full responsive einbauen, es darf auch eine elegande animation haben um es ein wenig eleganter zu machen

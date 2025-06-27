@@ -42,6 +42,34 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
+        {/* Logo Section */}
+        <motion.div 
+          className="hero-logo-container"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <motion.img 
+            src="/Logo1.jpeg" 
+            alt="NKone Logo" 
+            className="hero-logo-image"
+            animate={{ 
+              y: [0, -10, 0],
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut"
+            }}
+            whileHover={{ 
+              scale: 1.05,
+              filter: "brightness(1.1) drop-shadow(0 0 20px rgba(255, 0, 0, 0.3))",
+              y: -15
+            }}
+          />
+        </motion.div>
+
         {/* Clean Professional Title */}
         <motion.div className="hero-title-container">
           <motion.h1 

@@ -34,9 +34,22 @@ const Navbar = () => {
           whileTap={{ scale: 0.98 }}
         >
           <a href="#home" className="nav-logo-link">
-            <span className="nav-logo-text">
-              NKone<span className="logo-accent">7.3.1</span>
-            </span>
+            <motion.img 
+              src="/Logo-nav.jpeg" 
+              alt="NKone Logo" 
+              className="nav-logo-image"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ 
+                opacity: 1, 
+                scale: 1
+              }}
+              transition={{ duration: 0.5 }}
+              whileHover={{ 
+                scale: 1.05,
+                filter: "brightness(1.1)"
+              }}
+              whileTap={{ scale: 0.95 }}
+            />
           </a>
         </motion.div>
 

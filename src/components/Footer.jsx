@@ -53,14 +53,23 @@ const Footer = () => {
         >
           {/* Brand Section */}
           <div className="footer-brand">
-            <motion.h3 
-              className="footer-logo"
+            <motion.div
+              className="footer-logo-container"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              NKone<span className="logo-accent">7.3.1</span>
-            </motion.h3>
+              <motion.img 
+                src="/logo-footer.webp" 
+                alt="NKone Logo" 
+                className="footer-logo-image"
+                whileHover={{ 
+                  scale: 1.05,
+                  filter: "brightness(1.1)"
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              />
+            </motion.div>
             <p className="footer-tagline">
               Premium Rap Music & Entertainment
             </p>
