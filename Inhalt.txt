@@ -1,4 +1,8 @@
-navbar Logo bild statt schrift von nkone nehmen(logo-nav)
-footer logo bild statt schrift von nkone nehmen (logo-footer)
-bei landing page inhalt öndern lgo nehmen statt premium rap collektiv logo1 nehmen(logo1)
-full responsive einbauen, es darf auch eine elegande animation haben um es ein wenig eleganter zu machen
+inhalt ist in whatsapp einbauen - crew cards
+
+links aktualisieren - vorhandene links passend einsetzen
+
+(mobile crew social icons zu groß - skalieren)
+
+SEO --> mobile + desktop
+
