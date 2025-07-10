@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nkone731.github.io/NKone731/sitemap.xml
+
+# Social Media Crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Disallow specific paths
+Disallow: /assets/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
