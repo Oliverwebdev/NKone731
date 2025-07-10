@@ -1,0 +1,27 @@
+{
+  "name": "NKone7.3.1 - Premium Rap Collective",
+  "short_name": "NKone731",
+  "description": "Authentic Hip-Hop Music - Raw Talent Unleashed",
+  "start_url": "/NKone731/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff0000",
+  "icons": [
+    {
+      "src": "/NKone731/favicon_io/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/NKone731/favicon_io/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/NKone731/favicon_io/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
