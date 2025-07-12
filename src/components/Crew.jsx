@@ -16,43 +16,46 @@ const Crew = () => {
       id: 1,
       name: 'Filla23',
       stage: 'Filla23',
-      role: 'MC & Producer',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-      instagram: 'filla23',
-      tiktok: 'filla23',
-      youtube: 'nkone731',
-      specialty: 'Lyricism & Production',
-      years: '2019',
+      role: 'Gründer & MC',
+      description: 'Filla23 ist der Gründer und das Herzstück von Nkone731. Als visionärer Künstler und Leader der Crew prägt er den Sound und die Richtung des Kollektivs.',
+      instagram: 'nkone731',
+      facebook: 'https://www.facebook.com/share/1CAD5hXhy6/?mibextid=wwXIfr',
+      spotify: null,
+      tiktok: null,
+      specialty: 'Leadership & Vision',
+      years: '2012',
       gradient: 'from-red-500 via-purple-500 to-blue-500',
-      photo: 'Filla23.jpeg'
+      photo: 'Filla.jpeg'
     },
     { 
       id: 2,
       name: 'PillaOne',
-      stage: 'PillaOne7.3.1.',
-      role: 'Rapper & Songwriter',
-      description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.',
-      instagram: 'pillaone731',
-      tiktok: 'pillaone731',
-      youtube: 'nkone731',
-      specialty: 'Flow & Storytelling',
-      years: '2020',
+      stage: 'PillaOne',
+      role: 'Rapper & Producer',
+      description: 'PillaOne ist ein deutscher Rapper, Songwriter und Producer – seit 2012 ein fester Bestandteil der Rap-Crew Nkone 731. Geboren 1993 in Duisburg, wuchs er in Bayern auf. Seine ersten Schritte im Rap machte PillaOne 2010 unter einem anderen Künstlernamen. Musikalisch bewegt sich PillaOne zwischen Storytelling, Battle-Rap und Straßenrap. Seine Texte zeichnen sich durch Ehrlichkeit, Technik und persönliche Tiefe aus. Neben dem Rap ist er auch maßgeblich für das Vocal-Mixing und Mastering der Tracks von Nkone731 verantwortlich.',
+      instagram: 'https://www.instagram.com/pillaone7.3.1?igsh=dGl1bHNxNHg5aTBv',
+      spotify: 'https://open.spotify.com/intl-de/artist/7aAvDf3UFPXzKTydjmRS7T',
+      tiktok: 'https://www.tiktok.com/@pillaone7.3.1?_t=ZN-8xuR4XHmcZK&_r=1',
+      facebook: null,
+      specialty: 'Storytelling & Production',
+      years: '2012',
       gradient: 'from-orange-500 via-red-500 to-pink-500',
-      photo: 'PillaOne7.3.1.png'
+      photo: 'Pilla.jpeg'
     },
     { 
       id: 3,
       name: 'Zkittlez',
-      stage: 'Zkittlez7.3.1.',
-      role: 'Battle Rapper & Performer',
-      description: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
-      instagram: 'zkittlez731',
-      tiktok: 'zkittlez731',
-      youtube: 'nkone731',
-      specialty: 'Battle Rap & Performance',
-      years: '2021',
+      stage: 'Zkittlez',
+      role: 'Battle Rapper & Producer',
+      description: 'Zkittlez ist ein deutscher Rapper aus dem Umfeld der Crew Nkone 731, aktiv seit 2023. Stilistisch bewegt er sich hauptsächlich im Bereich Battle-Rap und Psycho-Hardcore-Rap – direkt, kompromisslos und mit messerscharfen Reimen. Seine Texte sind hart, authentisch und spiegeln eine rohe Energie wider. Sein musikalisches Debüt feierte Zkittlez mit dem Track „Schnauze voll", einem Feature mit PillaOne. Neben seinen Rap-Skills ist Zkittlez auch für die Produktion der Beats innerhalb der Crew verantwortlich.',
+      instagram: null,
+      spotify: null,
+      tiktok: null,
+      facebook: null,
+      specialty: 'Battle Rap & Beat Production',
+      years: '2023',
       gradient: 'from-green-500 via-teal-500 to-cyan-500',
-      photo: 'Zkittlez7.3.1.png'
+      photo: 'Zkittlez.jpeg'
     }
   ]
 
@@ -193,46 +196,54 @@ const Crew = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <motion.a
-                    href={`https://instagram.com/${member.instagram}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-link instagram"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <InstagramIcon />
-                  </motion.a>
-                  <motion.a
-                    href={`https://tiktok.com/@${member.tiktok}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-link tiktok"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <TikTokIcon />
-                  </motion.a>
-                  <motion.a
-                    href={`https://youtube.com/@${member.youtube}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-link youtube"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <YouTubeIcon />
-                  </motion.a>
-                  <motion.a
-                    href={`https://facebook.com/${member.instagram}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-link facebook"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FacebookIcon />
-                  </motion.a>
+                  {member.instagram && (
+                    <motion.a
+                      href={member.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link instagram"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <InstagramIcon />
+                    </motion.a>
+                  )}
+                  {member.tiktok && (
+                    <motion.a
+                      href={member.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link tiktok"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <TikTokIcon />
+                    </motion.a>
+                  )}
+                  {member.spotify && (
+                    <motion.a
+                      href={member.spotify}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link spotify"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <SpotifyIcon />
+                    </motion.a>
+                  )}
+                  {member.facebook && (
+                    <motion.a
+                      href={member.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link facebook"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FacebookIcon />
+                    </motion.a>
+                  )}
                 </motion.div>
               </div>
             </motion.div>
@@ -296,21 +307,6 @@ const TikTokIcon = () => (
   </svg>
 )
 
-const YouTubeIcon = () => (
-  <svg 
-    width="18" 
-    height="18" 
-    viewBox="0 0 24 24" 
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-    <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor"/>
-  </svg>
-)
 
 const FacebookIcon = () => (
   <svg 
@@ -324,6 +320,24 @@ const FacebookIcon = () => (
     strokeLinejoin="round"
   >
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+)
+
+const SpotifyIcon = () => (
+  <svg 
+    width="18" 
+    height="18" 
+    viewBox="0 0 24 24" 
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M8 14.5c1.5-1 4-1 5.5 0"/>
+    <path d="M8 10.5c2.5-1.5 6.5-1.5 9 0"/>
+    <path d="M8 6.5c3.5-2 8.5-2 12 0"/>
   </svg>
 )
 
