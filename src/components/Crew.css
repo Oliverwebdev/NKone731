@@ -238,6 +238,20 @@
   border-radius: 20px;
 }
 
+/* Adjustable image positioning for each member */
+.member-card:nth-child(1) .member-photo {
+  object-position: var(--filla-position, center);
+}
+
+.member-card:nth-child(2) .member-photo {
+  object-position: var(--pilla-position, center );
+}
+
+.member-card:nth-child(3) .member-photo {
+  object-position: var(--zkittlez-position, center);
+}
+
+
 .member-image-overlay {
   position: absolute;
   inset: 0;
