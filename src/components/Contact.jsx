@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Music } from 'lucide-react'
+import { Music, Send, Check, X } from 'lucide-react'
 import './Contact.css'
 
 const Contact = () => {
@@ -9,6 +9,61 @@ const Contact = () => {
     triggerOnce: true,
     threshold: 0.1
   })
+
+  const [formData, setFormData] = useState({
+    email: '',
+    name: '',
+    requestType: 'booking',
+    message: '',
+    phone: ''
+  })
+  
+  const [showModal, setShowModal] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  
+  const requestTypes = [
+    { value: 'booking', label: 'Booking Anfrage', icon: '🎤' },
+    { value: 'collaboration', label: 'Kollaboration', icon: '🤝' },
+    { value: 'interview', label: 'Interview', icon: '📺' },
+    { value: 'remix', label: 'Remix Anfrage', icon: '🎵' },
+    { value: 'general', label: 'Allgemeine Anfrage', icon: '💬' }
+  ]
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xblkgybd', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          name: formData.name,
+          phone: formData.phone,
+          requestType: formData.requestType,
+          message: formData.message,
+          subject: `${requestTypes.find(type => type.value === formData.requestType)?.label} - ${formData.name}`
+        })
+      })
+      
+      if (response.ok) {
+        setShowModal(true)
+        setFormData({ email: '', name: '', requestType: 'booking', message: '', phone: '' })
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section className="section contact" id="contact" ref={ref}>
@@ -22,35 +77,179 @@ const Contact = () => {
           >
             Kontakt
           </motion.h2>
-          <motion.div 
-            className="social-links"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <a href="https://youtube.com/@nkone731" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 YouTube">
-              <YouTubeIcon />
-            </a>
-            <a href="https://www.instagram.com/nkone731?igsh=ZmVzYnNwdDBkazBx" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 Instagram">
-              <InstagramIcon />
-            </a>
-            <a href="https://www.facebook.com/share/16sruNq88S/?mibextid=wwXIfr" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 Facebook">
-              <FacebookIcon />
-            </a>
-            <a href="https://music.apple.com/de/album/f-k-das-system/1640000781?i=1640000785" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 Apple Music">
-              <AppleMusicIcon />
-            </a>
-          </motion.div>
-          <motion.a 
-            href="mailto:kontakt@nkone731.de" 
-            className="email-link"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            kontakt@nkone731.de
-          </motion.a>
+          
+          <div className="contact-grid">
+            <motion.div 
+              className="contact-form-container"
+              initial={{ opacity: 0, x: -50 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="name">Name *</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="Dein Name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="deine@email.de"
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="phone">Telefon</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="+49 123 456789"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="requestType">Art der Anfrage *</label>
+                    <select
+                      id="requestType"
+                      name="requestType"
+                      value={formData.requestType}
+                      onChange={handleInputChange}
+                      required
+                    >
+                      {requestTypes.map(type => (
+                        <option key={type.value} value={type.value}>
+                          {type.icon} {type.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="message">Nachricht *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows="6"
+                    placeholder="Beschreibe deine Anfrage..."
+                  ></textarea>
+                </div>
+                
+                <button type="submit" className="submit-btn" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <div className="spinner"></div>
+                      Wird gesendet...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={20} />
+                      Nachricht senden
+                    </>
+                  )}
+                </button>
+              </form>
+            </motion.div>
+            
+            <motion.div 
+              className="contact-info"
+              initial={{ opacity: 0, x: 50 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <div className="contact-card">
+                <h3>Direkter Kontakt</h3>
+                <a href="mailto:kontakt@nkone731.de" className="email-link">
+                  Nkone731@gmail.com
+                </a>
+                <p className="contact-description">
+                  Für schnelle Anfragen oder wenn du direkt in Kontakt treten möchtest.
+                </p>
+              </div>
+              
+              <div className="social-section">
+                <h3>Social Media</h3>
+                <div className="social-links">
+                  <a href="https://youtube.com/@nkone731" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 YouTube">
+                    <YouTubeIcon />
+                  </a>
+                  <a href="https://www.instagram.com/nkone731?igsh=ZmVzYnNwdDBkazBx" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 Instagram">
+                    <InstagramIcon />
+                  </a>
+                  <a href="https://www.facebook.com/share/16sruNq88S/?mibextid=wwXIfr" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 Facebook">
+                    <FacebookIcon />
+                  </a>
+                  <a href="https://music.apple.com/de/album/f-k-das-system/1640000781?i=1640000785" className="social-icon" target="_blank" rel="noopener noreferrer" title="NKone731 Apple Music">
+                    <AppleMusicIcon />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
+        
+        {/* Success Modal */}
+        {showModal && (
+          <motion.div 
+            className="modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowModal(false)}
+          >
+            <motion.div 
+              className="modal-content"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="modal-close"
+                onClick={() => setShowModal(false)}
+              >
+                <X size={24} />
+              </button>
+              
+              <div className="modal-icon">
+                <Check size={48} />
+              </div>
+              
+              <h3>Nachricht erfolgreich gesendet!</h3>
+              <p>
+                Vielen Dank für deine Anfrage. Wir melden uns so schnell wie möglich bei dir zurück.
+              </p>
+              
+              <button 
+                className="modal-btn"
+                onClick={() => setShowModal(false)}
+              >
+                Verstanden
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
       </div>
     </section>
   )
@@ -68,17 +267,6 @@ const InstagramIcon = () => (
   </svg>
 )
 
-const SpotifyIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.859-.179-.979-.599-.122-.421.18-.861.599-.979 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.322 1.159zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z"/>
-  </svg>
-)
-
-const TikTokIcon = () => (
-  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
-  </svg>
-)
 
 const FacebookIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
