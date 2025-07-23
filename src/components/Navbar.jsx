@@ -64,7 +64,7 @@ const Navbar = () => {
             { href: '#music', label: 'Music' },
             { href: '#crew', label: 'Artists' },
             { href: '#manifesto', label: 'Manifesto' },
-            { href: '#contact', label: 'Contact' }
+            { href: '#contact', label: 'Kontakt' }
           ].map((item, index) => (
             <motion.li 
               key={item.href}

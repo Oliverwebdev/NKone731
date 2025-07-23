@@ -178,7 +178,7 @@ const Footer = () => {
               </motion.span>
               <span className="credit-text">by</span>
               <motion.a 
-                href="mailto:developer@example.com" 
+                href="mailto:karl78850@gmail.com" 
                 className="developer-link"
                 whileHover={{ 
                   background: 'linear-gradient(135deg, #ff0000, #ff6b6b)',
