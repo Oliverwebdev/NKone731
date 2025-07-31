@@ -1,13 +1,38 @@
-Wir müssen google analytics einbinden in die seite um den traffic und alles überwachen zu können. 
-ich habe ein konto alles nur es muss noch richtig eingebunden werden. hier ist alles was du brauchst:
+1. Extra Kleine Geräte (Mobiltelefone im Hochformat)
+Breite: Typischerweise unter 576
+textpx (z.B. 320
+textpx, 375
+textpx, 425
+textpx).
 
-Unten finden Sie das Google-Tag für dieses Konto. Kopieren Sie es und fügen Sie es direkt nach dem <head>-Element in den Code aller Seiten Ihrer Website ein. Das Google-Tag darf auf jeder Seite nur einmal vorhanden sein.
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-E2E4TEL1V0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+Anwendung: Dies ist oft Ihr "Mobile First"-Breakpoint. Hier sollte Ihr Layout sehr linear sein, mit Inhalten, die vertikal gestapelt werden, um eine gute Lesbarkeit auf kleinen Bildschirmen zu gewährleisten. Navigationselemente werden oft zu einem Hamburger-Menü zusammengefasst.
 
-  gtag('config', 'G-E2E4TEL1V0');
-</script>
+2. Kleine Geräte (Mobiltelefone im Querformat, Tablets im Hochformat)
+Breite: Typischerweise von 576
+textpx bis 767
+textpx.
+
+Anwendung: Hier können Sie möglicherweise ein wenig mehr Inhalt nebeneinander anordnen oder die Schriftgrößen leicht anpassen. Bilder und Videos sollten weiterhin flüssig skaliert werden.
+
+3. Mittelgroße Geräte (Tablets im Querformat, kleinere Laptops)
+Breite: Typischerweise von 768
+textpx bis 991
+textpx.
+
+Anwendung: Ab hier können Sie beginnen, ein mehrspaltiges Layout in Betracht zu ziehen. Die Navigation kann breiter werden, eventuell als Leiste statt eines Hamburger-Menüs.
+
+4. Große Geräte (Laptops, Desktops)
+Breite: Typischerweise von 992
+textpx bis 1199
+textpx.
+
+Anwendung: Dies ist der Bereich, in dem viele Websites ihr "Standard"-Desktop-Layout anzeigen. Sie haben mehr Platz für komplexe Layouts, größere Bilder und detailliertere Navigation.
+
+5. Extra Große Geräte (Große Desktops und hochauflösende Bildschirme)
+Breite: Typischerweise ab 1200
+textpx und aufwärts (z.B. 1400
+textpx, 1600
+textpx, 1920
+textpx und höher).
+
+Anwendung: Für diese Bildschirme können Sie die maximale Breite Ihres Inhalts festlegen, um zu verhindern, dass er zu breit und schwer lesbar wird. Sie können auch größere Schriftgrößen oder zusätzliche visuelle Elemente einbinden, um den Raum optimal zu nutzen.
